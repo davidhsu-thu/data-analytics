@@ -5,7 +5,7 @@ headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
              AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'} 
 def extract_xbrl(codes, years, items):
     """
-    extract items form financial statements that companies file with the regulator
+    extract items from financial statements that companies file with the regulator
     codes, a list with companies eg. [1101, 1102]
     years, a list with years eg. [2019, 2020]
     items, a list with items eg. ['Revenue', 'GrossProfit']
