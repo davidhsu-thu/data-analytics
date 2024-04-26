@@ -24,7 +24,7 @@ def extract_xbrl(codes, years, items):
             res.encoding = 'big5'
             x = IXBRL(io.StringIO(res.text), raise_on_error=False)
             for item in items:
-                Found = False
+                is_found = False
                 for i in x.numeric:
                     
                     # point of time data have an instant attribute; period data have an enddate attribute
@@ -36,10 +36,10 @@ def extract_xbrl(codes, years, items):
                         print(code, year, end='\r')
                         # retrieved value is dollar unit
                         data.setdefault(item, []).append(i.value)
-                        Found = True
+                        is_found = True
                         break # if found break the loop and start the next item
                 # if the item is not found, setting it to zero
-                if not Found:
+                if not is_found:
                     print(code, year, end='\r')
                     data.setdefault(item, []).append(0)   
     return data
