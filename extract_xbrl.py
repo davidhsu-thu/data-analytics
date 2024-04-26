@@ -34,7 +34,8 @@ def extract_xbrl(codes, years, items):
                     if i.name == item and i_year == year  and str(i.context).find('_') == -1:
                                             
                         print(code, year, end='\r')
-                        data.setdefault(item, []).append(i.value/1_000_000)
+                        # retrieved value is dollar unit
+                        data.setdefault(item, []).append(i.value)
                         Found = True
                         break # if found break the loop and start the next item
                 # if the item is not found, setting it to zero
