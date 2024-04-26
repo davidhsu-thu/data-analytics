@@ -9,9 +9,9 @@ def extract_xbrl(codes, years, items):
     codes, a list with companies eg. [1101, 1102]
     years, a list with years eg. [2019, 2020]
     items, a list with items eg. ['Revenue', 'GrossProfit']
-    this function will retrieving items and respective amount of the Q4 financial statements from the websiet of mops
+    this function will retrieving items and their respective amounts of the Q4 financial statements from the websiet of mops
     https://mops.twse.com.tw/mops/web/t203sb01
-    and return a dictionary (codes will be recasted as string)
+    and return a dictionary
     """
     data = {}
     for code in codes:
