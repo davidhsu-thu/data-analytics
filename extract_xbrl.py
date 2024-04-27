@@ -1,5 +1,6 @@
 from ixbrlparse import IXBRL
 import requests, io
+import numpy as np
 
 headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
              AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'} 
@@ -41,5 +42,5 @@ def extract_xbrl(codes, years, items):
                 # if the item is not found, setting it to zero
                 if not is_found:
                     print(code, year, end='\r')
-                    data.setdefault(item, []).append(0)   
+                    data.setdefault(item, []).append(np.nan)   
     return data
