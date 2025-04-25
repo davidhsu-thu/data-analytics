@@ -20,10 +20,23 @@ def extract_xbrl(codes, years, items):
             # setting the keys of the dictionary, and value with an emtpy list if the key does not exist 
             data.setdefault('code', []).append(code)
             data.setdefault('date', []).append(year)
-            url_add = f'https://mops.twse.com.tw/server-java/t164sb01?step=1&CO_ID={str(code)}&SYEAR={str(year)}&SSEASON=4&REPORT_ID=C'
-            res = requests.get(url_add, headers = headers)
-            res.encoding = 'big5'
-            x = IXBRL(io.StringIO(res.text), raise_on_error=False)
+            is_located = False
+            fr_ms = ['fr1-m1', 'fr1-m2', 'fr2-m1', 'fr2-m2']
+            for frm in fr_ms:
+              url_add = f'https://mops.twse.com.tw/server-java/t164sb01?step=3&SYEAR={str(year)}&file_name=tirs-{frm}-ci-cr-{str(code)}-{str(year)}Q{quarter}.html'
+              res = requests.get(url_add, headers = headers)
+              res.encoding = 'big5'
+              if '檔案不存在' not in res.text:
+                is_located = True
+                break
+              else:
+                continue
+            if is_located:
+              x = IXBRL(io.StringIO(res.text), raise_on_error=False)
+            else:
+              for item in items:
+                data.setdefault(item, []).apend(np.nan)
+              continue
             for item in items:
                 is_found = False
                 for i in x.numeric:
